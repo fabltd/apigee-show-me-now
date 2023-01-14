@@ -13,13 +13,14 @@ export class ApiService {
 
   getShipment(token: string): Observable<any[]> {
     return this.httpClient
-      .get<any[]>(`${environment.url}shipments/?token=${token}`);
+      .get<any>(`${environment.url}shipments/?id=${token}`)
+      .pipe(map(result=>result.result));
   }
 
   getShipments(): Observable<any[]> {
     return this.httpClient
       .get<any>(`${environment.url}shipments/`)
-      .pipe(map(result=>result.result));;
+      .pipe(map(result=>result.result));
   }
 
 

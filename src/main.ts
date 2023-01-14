@@ -1,3 +1,4 @@
+import { TrackShipmentComponent } from './app/track-shipment/track-shipment.component';
 import { ShipmentsComponent } from './app/shipments/shipments.component';
 import { SuppliersComponent } from './app/suppliers/suppliers.component';
 import { CustomersComponent } from './app/customers/customers.component';
@@ -21,6 +22,10 @@ const routes: Routes = [
 {
   path: 'suppliers',
   component: SuppliersComponent
+},
+{
+  path: 'progress',
+  component: TrackShipmentComponent
 }
 ];
 

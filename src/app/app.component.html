@@ -6,13 +6,16 @@
       <hr>
       <ul class="nav nav-pills flex-column mb-auto">
         <li>
+          <a routerLink="/progress" class="nav-link text-white"  routerLinkActive="active">Track My Package</a>
+        </li>
+        <li>
           <a routerLink="/suppliers" class="nav-link text-white"  routerLinkActive="active">Suppliers</a>
         </li>
         <li>
           <a routerLink="/shipments" class="nav-link text-white"  routerLinkActive="active">Shipments</a>
         </li>
         <li>
-          <a routerLink="/" class="nav-link text-white"  routerLinkActive="active">Customers</a>
+          <a routerLink="/" class="nav-link text-white"  routerLinkActive="active"  [routerLinkActiveOptions]="{exact: true}">Customers</a>
         </li>
       </ul>
     </div>
