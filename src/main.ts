@@ -18,10 +18,6 @@ import { AssignCustomerComponent } from './app/suppliers/assign-customer/assign-
 import { EditShipmentComponent } from './app/shipments/edit-shipment/edit-shipment.component';
 
 const routes: Routes = [
-  {
-    path: '',
-    component: TrackShipmentComponent
-},
 {
   path: 'shipments',
   component: ShipmentsComponent,    
@@ -31,7 +27,11 @@ const routes: Routes = [
       component: AddShipmentComponent, 
     },
     {
-      path: 'edit/:id',
+      path: 'modify',
+      component: EditShipmentComponent, 
+    },
+    {
+      path: 'modify/:id',
       component: EditShipmentComponent, 
     }
   ]
@@ -85,7 +85,11 @@ const routes: Routes = [
   ],
 },
 {
-  path: 'progress',
+  path: 'progress/:id',
+  component: TrackShipmentComponent
+},
+{
+  path: '',
   component: TrackShipmentComponent
 },
 { 

@@ -15,19 +15,17 @@
             </div>
         </div>
     </form>
-    <div>
+    <div *ngIf="shipment?.ShipmentDate">
         <br>
-        <div *ngFor="let shipment of shipments$ | async; trackBy:trackShipment">
-            <h2>Shipment Date: {{convertTimestamp(shipment.ShipmentDate) | date:'short'}}</h2>
-            <br>
-            <div class="stepper-wrapper">
-                <div *ngFor="let count of counter" class="stepper-item"
-                    [ngClass]="shipment.progress?.length > count ? 'completed' : ''">
-                    <div class="step-counter">{{count+1}}</div>
-                    <div class="step-name">{{steps[count]}}</div>
-                    <div *ngIf="shipment.progress && shipment.progress.length>count" class="step-date">
-                        {{convertTimestamp(shipment.progress[count]) | date:'short'}}
-                    </div>
+        <h2>Shipment Date: {{convertTimestamp(shipment?.ShipmentDate) | date:'short'}}</h2>
+        <br>
+        <div   class="stepper-wrapper">
+            <div *ngFor="let count of counter" class="stepper-item"
+                [ngClass]="shipment?.progress?.length > count ? 'completed' : ''">
+                <div class="step-counter">{{count+1}}</div>
+                <div class="step-name">{{steps[count]}}</div>
+                <div *ngIf="shipment?.progress?.length>count" class="step-date">
+                    {{convertTimestamp(shipment?.progress[count]) | date:'short'}}
                 </div>
             </div>
         </div>

@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { ShipmentService } from './../shipments/shipment.service';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ApiService } from '../api.service';
 import { Observable } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-track-shipment',
@@ -11,14 +12,32 @@ import { Observable } from 'rxjs';
   templateUrl: './track-shipment.component.html',
   styleUrls: ['./track-shipment.component.css']
 })
-export class TrackShipmentComponent {
+export class TrackShipmentComponent implements OnInit {
 
+errorMessage = '';
 trackingNumber = '';
-shipments$!: Observable<any[]>; 
+shipment?: any; 
 counter = [0,1,2,3];
 steps = ["Picked up", "In Transit", "Out For Delivery", "Arrived"];
 
-constructor(private api: ApiService) {}
+constructor(private shipmentService: ShipmentService, 
+  private route: ActivatedRoute) {}
+
+
+ngOnInit(): void {
+  const id = this.route.snapshot.paramMap.get('id');
+  if (id) {
+    this.shipmentService.getShipment(id)
+    .subscribe(shipment => {
+      this.shipment = shipment;
+      this.trackingNumber = id;
+      if(!this.shipment?.ShipmentDate) {
+        this.errorMessage = "shipment does not exist";
+        this.shipment = null;
+      }
+    });
+  }
+}
 
 convertTimestamp(timestamp: any): Date {
   if (timestamp._seconds) {
@@ -29,14 +48,18 @@ convertTimestamp(timestamp: any): Date {
 }
 
 submit() {
-  this.shipments$ = this.api.getShipment(this.trackingNumber);
+  this.shipmentService.getShipment(this.trackingNumber)
+  .subscribe(shipment => {
+    this.shipment = shipment;
+    if(!this.shipment?.ShipmentDate) {
+      this.errorMessage = "shipment does not exist";
+      this.shipment = null;
+    }
+  });
 }
 
 
 
 
-trackShipment(i: number, shipment: any): number {
-  return shipment.id;
-}
 
 }

@@ -1,1 +1,41 @@
-<p>edit-shipment works!</p>
+<div>
+    <h1>Set Progress</h1>
+    <form #trackingForm="ngForm" name="trackingForm" (ngSubmit)="submit()" novalidate class="form-inline">
+        <div class="form-group">
+            <label>Enter tracking number:
+                <input class="form-control" type="text" required name="number" #number="ngModel"
+                    [(ngModel)]="trackingNumber" />
+            </label>
+            <button class="btn btn-primary" type="submit" [disabled]="!trackingForm.form.valid">Get Progress</button>
+        </div>
+
+        <div *ngIf="!(number.valid || number.pristine)">
+            <div *ngIf="number.errors && number.errors['required']" class="alert alert-danger">
+                Must provide tracking id
+            </div>
+        </div>
+    </form>
+    <div>
+        <br>
+        <div *ngIf="shipment?.ShipmentDate">
+            <br>
+            <h2>Shipment Date: {{convertTimestamp(shipment?.ShipmentDate) | date:'short'}}</h2>
+            <br>
+            <div class="stepper-wrapper">
+                <div *ngFor="let count of counter" class="stepper-item"
+                    [ngClass]="shipment?.progress?.length > count ? 'completed' : ''">
+                    <div class="step-counter">{{count+1}}</div>
+                    <div class="step-name">{{steps[count]}}</div>
+                    <div *ngIf="shipment?.progress?.length>count" class="step-date">
+                        {{convertTimestamp(shipment?.progress[count]) | date:'short'}}
+                    </div>
+                    <div *ngIf="(count === 0 && !shipment?.progress) || shipment?.progress?.length===count" class="step-date">
+                       <button type="button" class="btn btn-primary"(click)="setStageComplete()">Set Complete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>

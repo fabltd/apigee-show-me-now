@@ -34,6 +34,11 @@ export class ApiService {
     return this.httpClient.post<any>(`${environment.url}shipments`, shipment);
   }
 
+  modifyShipment(shipment: any): Observable<any> {
+    return this.httpClient.patch<any>(`${environment.url}shipments`, shipment);
+  }
+
+
 // suppliers
 
   getSupplier(id: string): Observable<any[]> {

@@ -16,12 +16,6 @@ import { Router } from '@angular/router';
 })
 export class AddShipmentComponent {
 
-  // this needs two fields: one for the supplier,
-  // and another that should be a user dropdown
-  // that appears once supplier is selected.
-
-  // Then button to allow submission of new shipment
-  // which will be timestamped to now
 
   customerEmail = '';
   id = '';
@@ -44,9 +38,11 @@ export class AddShipmentComponent {
         return of([]);
       }))
       .subscribe(supplier => {
-        this.supplier = supplier;
-        if (!this.supplier?.Info?.Name) {
+        if (!supplier?.Info?.Name) {
           this.errorMessage = "supplier does not exist";
+        }
+        else {
+          this.supplier = supplier;
         }
       });
   }
@@ -63,8 +59,8 @@ export class AddShipmentComponent {
       return of({});
     })).subscribe(msg => {
       console.log(msg);
-      this.router.navigate(['shipments', 'edit', this.supplier.id]);
-    })
+      this.router.navigate(['shipments', 'modify', msg.trackingId]);
+    });
   }
 
   showError(error: any): void {
