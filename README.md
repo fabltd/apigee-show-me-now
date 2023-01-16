@@ -1,27 +1,41 @@
-# ShowMeNow
+# Show Me Now
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.0.5.
+This project is a demonstration application for the Apigee-X course. It was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.0.5.
 
-## Development server
+# Possible Method calls:
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Before authentication:
 
-## Code scaffolding
+1. GET: Track My Package / "Get Progress"  
+    1. Shipments with ascending progress steps:
+        1. ZZBeDAmA9HQFOZHsJVwD
+        1. c4oblvmjQbQeozmrrw5N
+        1. lDvb2Pbyi1ESWecFuRQK
+        1. lFCuqiRwVrq4cOy9goGp
+        1. caZEwwRy5eIbttKbB3th
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## After  authentication:
 
-## Build
+1. Shipments
+    1. POST: Create / "Get Customers List" / **"Add Shipment"**
+    1. GET: Set Progress / **"Get Progress"**
+    1. PATCH: Set Progress / "Get Progress"/  **"Set Complete"** 
+        1. Shipments with ascending progress steps:
+            1. ZZBeDAmA9HQFOZHsJVwD
+            1. c4oblvmjQbQeozmrrw5N
+            1. lDvb2Pbyi1ESWecFuRQK
+            1. lFCuqiRwVrq4cOy9goGp
+            1. caZEwwRy5eIbttKbB3th
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+1. Suppliers
+    1. GET: Find / **"Get Supplier"**
+    1. POST: Add / **"Add Supplier"** 
+    1. PUT: Add / **"Update Supplier"** 
+    1. PATCH: Assign Customer /  **"Add Customer"** 
+    1. DELETE: Find / "delete" / **"Confirm Delete"** 
 
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+1. Customers
+    1. GET: Find / **"Get Customer"**
+        1. PUT: Find / "Get Customer" / "edit" / **"Update Customer"** 
+        1. DELETE: Find / "delete" / **"Confirm Delete"** 
+    1. POST: Add / **"Add Customer"** 
