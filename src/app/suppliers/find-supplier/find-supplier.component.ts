@@ -30,6 +30,10 @@ export class FindSupplierComponent {
       }))
       .subscribe(supplier => {
         this.supplier = supplier;
+        if(!this.supplier?.Info?.Name) {
+          this.errorMessage = "supplier does not exist";
+          this.supplier = null;
+        }
       });
   }
 

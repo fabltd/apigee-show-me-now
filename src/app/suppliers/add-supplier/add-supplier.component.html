@@ -41,7 +41,7 @@
         <br>
         Customers:
         <span *ngIf="supplier.Customers.length>0">      
-            <br> (Click "Update Customer" to apply deletions)
+            <br> (Click "Update Supplier" to apply deletions)
         </span>
         <br><span *ngIf="supplier.id">
             (Add Customers using the <a [routerLink]="['/suppliers', 'assign', supplier.id]" >assign customer</a> form)

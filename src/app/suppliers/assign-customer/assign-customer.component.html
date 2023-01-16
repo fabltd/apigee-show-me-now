@@ -1,1 +1,34 @@
-<p>This will use patch</p>
+<form #findCustomerForm="ngForm" name="trackingForm" (ngSubmit)="submit()" novalidate class="form-inline">
+   <p>
+        <span>The supplier:</span>&nbsp; 
+        <span>{{supplier?.Info.Name}}</span>
+   </p>
+   
+    <div class="form-group">
+        <label>Customer email address:
+            <input class="form-control" type="email" required email name="email" #emailAddress="ngModel"
+                [(ngModel)]="email" />
+        </label>
+        <button class="btn btn-primary" type="submit" [disabled]="!findCustomerForm.form.valid">Add Customer</button>
+    </div>
+
+    <div *ngIf="!(emailAddress.valid || emailAddress.pristine)">
+        <div *ngIf="emailAddress.errors && emailAddress.errors['required']" class="alert alert-danger">
+            Must provide customer email
+        </div>
+        <div *ngIf="emailAddress.errors && emailAddress.errors['email']" class="alert alert-danger">
+            Must be a valid email address
+        </div>
+    </div>
+</form>
+<p>Existing Customers:</p>
+<div style="padding-left:1rem" *ngFor="let customer of supplier?.Customers; trackBy:trackCustomer" class="card-text">
+    <div style="margin-bottom:0.1rem">
+   {{customer}}
+    </div>
+ </div>
+
+
+<div *ngIf="errorMessage" class="alert alert-danger">
+    Sorry, there's been an error communicating with the server: {{errorMessage}}
+</div> 

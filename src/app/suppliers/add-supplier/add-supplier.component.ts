@@ -1,4 +1,3 @@
-import { CustomersComponent } from './../../customers/customers.component';
 import { SupplierService } from './../supplier.service';
 import { FormsModule } from '@angular/forms';
 import { Component } from '@angular/core';
@@ -30,7 +29,7 @@ export class AddSupplierComponent {
         StateOrProvince: ''
     }
 }
-  email = '';
+  id = '';
   add = true;
 
   constructor(private supplierService: SupplierService,
@@ -41,8 +40,8 @@ export class AddSupplierComponent {
     if (id) {
       // we're editing an existing
       this.add = false;
-      this.email = id;
-      this.supplierService.getSupplier(this.email)
+      this.id = id;
+      this.supplierService.getSupplier(this.id)
         .pipe(catchError(err => {
           this.showError(err);
           return of({});
@@ -70,13 +69,14 @@ export class AddSupplierComponent {
 
   submit(): void {
     if (this.add) {
+      delete this.supplier.id;  //remove empty id - set on server
       this.supplierService.addSupplier(this.supplier)
         .pipe(catchError(err => {
           this.showError(err);
           return of({});
         })).subscribe(msg => {
           console.log(msg);
-          this.router.navigate(['supplier', 'add', this.supplier.Email]);
+          this.router.navigate(['suppliers', 'edit', this.supplier.id]);
         });
     }
     else {

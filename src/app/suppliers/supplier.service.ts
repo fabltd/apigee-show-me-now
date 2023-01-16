@@ -17,7 +17,6 @@ export class SupplierService {
     .pipe(map(result=>result[0]));
   }
 
-
   getSuppliers() : void {
     this.suppliers$ = this.api.getSuppliers();
   }
@@ -29,6 +28,12 @@ export class SupplierService {
   updateSupplier(supplier:any): Observable<any> {
     return  this.api.updateSupplier(supplier);
    }
+
+
+  modifySupplier(supplier:any): Observable<any> {
+    return  this.api.modifySupplier(supplier);
+   }
+
 
   deleteSupplier(id: string) : Observable<any> {
     return this.api.deleteSupplier(id);
