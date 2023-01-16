@@ -2,7 +2,7 @@
 
 This project is a demonstration application for the Apigee-X course. It was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.0.5.
 
-# Possible Method calls:
+# Possible REST Method calls:
 
 ## Before authentication:
 

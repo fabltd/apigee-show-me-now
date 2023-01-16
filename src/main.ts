@@ -16,6 +16,9 @@ import { AddSupplierComponent } from './app/suppliers/add-supplier/add-supplier.
 import { DeleteSupplierComponent } from './app/suppliers/delete-supplier/delete-supplier.component';
 import { AssignCustomerComponent } from './app/suppliers/assign-customer/assign-customer.component';
 import { EditShipmentComponent } from './app/shipments/edit-shipment/edit-shipment.component';
+import { AngularFireModule } from '@angular/fire/compat';
+import { environment } from './environments/environment';
+import { importProvidersFrom } from '@angular/core';
 
 const routes: Routes = [
 {
@@ -99,10 +102,14 @@ const routes: Routes = [
 ];
 
 
-
-
 bootstrapApplication(AppComponent, {
   providers: [provideRouter(routes),
-    provideHttpClient()
+    provideHttpClient(),
+    importProvidersFrom(
+      AngularFireModule.initializeApp(environment.firebaseConfig)
+    )
+    
   ]
 }).catch(err => console.error(err));
+
+
