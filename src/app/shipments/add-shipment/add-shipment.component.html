@@ -1,0 +1,36 @@
+<form #addShipmentForm="ngForm" name="trackingForm" (ngSubmit)="submit()" novalidate class="form-inline">
+    <div class="form-group">
+        <label>Enter supplier id:
+            <input class="form-control" type="text" required name="id" #supplierId="ngModel"
+                [(ngModel)]="id" />
+        </label>
+        <button class="btn btn-primary" type="button" (click)="getCustomers()" [disabled]="!supplierId.valid">Get Customers List</button>
+    </div>
+
+    <div *ngIf="!(supplierId.valid || supplierId.pristine)">
+        <div *ngIf="supplierId.errors && supplierId.errors['required']" class="alert alert-danger">
+            Must provide supplier id
+        </div>
+    </div>
+    <p>
+        {{supplier.Info.Name}}
+    </p>
+     <div *ngIf="supplier.Customers.length>0">
+        <label>Select Customer:
+            <select #customers required  [(ngModel)]="customerEmail" name="email" >
+                <option *ngFor="let customer of supplier.Customers" [value]="customer">
+                    {{customer}}
+                </option>
+            </select>
+        </label>   
+        <br>
+        <br>
+        <button class="btn btn-primary" type="submit" [disabled]="!addShipmentForm.form.valid">Add Shipment</button>
+     </div>
+ 
+ 
+</form>
+
+<div *ngIf="errorMessage" class="alert alert-danger">
+    Sorry, there's been an error communicating with the server: {{errorMessage}}
+</div> 

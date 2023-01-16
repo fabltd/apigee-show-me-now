@@ -30,6 +30,9 @@ export class ApiService {
       .pipe(map(result=>result.result));
   }
 
+  addShipment(shipment: any): Observable<any> {
+    return this.httpClient.post<any>(`${environment.url}shipments`, shipment);
+  }
 
 // suppliers
 

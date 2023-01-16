@@ -1,3 +1,4 @@
+import { AddShipmentComponent } from './app/shipments/add-shipment/add-shipment.component';
 import { DeleteCustomerComponent } from './app/customers/delete-customer/delete-customer.component';
 import { AddCustomerComponent } from './app/customers/add-customer/add-customer.component';
 import { FindCustomerComponent } from './app/customers/find-customer/find-customer.component';
@@ -14,6 +15,7 @@ import { FindSupplierComponent } from './app/suppliers/find-supplier/find-suppli
 import { AddSupplierComponent } from './app/suppliers/add-supplier/add-supplier.component';
 import { DeleteSupplierComponent } from './app/suppliers/delete-supplier/delete-supplier.component';
 import { AssignCustomerComponent } from './app/suppliers/assign-customer/assign-customer.component';
+import { EditShipmentComponent } from './app/shipments/edit-shipment/edit-shipment.component';
 
 const routes: Routes = [
   {
@@ -22,7 +24,17 @@ const routes: Routes = [
 },
 {
   path: 'shipments',
-  component: ShipmentsComponent
+  component: ShipmentsComponent,    
+  children: [
+    {
+      path: '', 
+      component: AddShipmentComponent, 
+    },
+    {
+      path: 'edit/:id',
+      component: EditShipmentComponent, 
+    }
+  ]
 },
 {
   path: 'suppliers',

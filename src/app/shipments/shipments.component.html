@@ -1,3 +1,27 @@
-<p *ngFor="let shipment of shipments$ | async; trackBy:trackShipment">
-    {{shipment.id}}<br>
-</p>
+<div class="container">
+    <div class="row">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+              <span class="navbar-brand">Shipments</span>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <a routerLink="/shipments" class="nav-link"  routerLinkActive="active">Create</a>
+                     <a [routerLink]="['modify']" class="nav-link"  routerLinkActive="active">Set Progress</a>
+                 </div>
+              </div>
+            </div>
+          </nav>
+        <br>
+        <br>
+        <br>
+    </div>
+    <section class="row">
+        <router-outlet></router-outlet>
+    </section> 
+</div>
+
+
+
