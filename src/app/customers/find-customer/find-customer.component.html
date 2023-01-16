@@ -1,0 +1,38 @@
+<form #findCustomerForm="ngForm" name="trackingForm" (ngSubmit)="submit()" novalidate class="form-inline">
+    <div class="form-group">
+        <label>Enter customer email address:
+            <input class="form-control" type="email" required email name="email" #emailAddress="ngModel"
+                [(ngModel)]="email" />
+        </label>
+        <button class="btn btn-primary" type="submit" [disabled]="!findCustomerForm.form.valid">Get Customer</button>
+    </div>
+
+    <div *ngIf="!(emailAddress.valid || emailAddress.pristine)">
+        <div *ngIf="emailAddress.errors && emailAddress.errors['required']" class="alert alert-danger">
+            Must provide customer email
+        </div>
+        <div *ngIf="emailAddress.errors && emailAddress.errors['email']" class="alert alert-danger">
+            Must be a valid email address
+        </div>
+    </div>
+</form>
+<div>
+    <div *ngIf="errorMessage" class="alert alert-danger">
+        Sorry, there's been an error communicating with the server: {{errorMessage}}
+    </div> 
+    <div *ngIf="customer" class="card" style="width: 18rem;">
+        <div class="card-body">
+            <app-display-customer [customer]="customer"></app-display-customer>
+            <p>
+                <br>
+                <a [routerLink]="['edit', customer?.Email]" class="btn btn-primary">edit</a>
+                &nbsp;
+                <a [routerLink]="['delete', customer?.Email]" class="btn btn-danger">delete</a>
+            </p>
+        </div>
+    </div>
+
+
+
+
+</div>

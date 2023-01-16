@@ -1,0 +1,16 @@
+<h2 class="card-title">{{supplier?.Info.Name}}</h2>
+<p>Address:</p>
+<div style="padding-left:1rem">
+    <div class="card-text">{{supplier?.Address.StreetAddress}}</div>
+    <div class="card-text">{{supplier?.Address.Address2}}</div>
+    <div class="card-text">{{supplier?.Address.StateOrProvince}}</div>
+    <div class="card-text">{{supplier?.Address.PostalCode}}</div>
+    <div class="card-text">{{supplier?.Address.Country}}</div>
+</div>
+<br>
+<p>Customers:</p>
+<div style="padding-left:1rem">
+    <div *ngFor="let customer of supplier?.Customers; trackBy:trackCustomer" class="card-text">
+        {{customer}}
+    </div>
+</div>

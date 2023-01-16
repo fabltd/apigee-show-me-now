@@ -1,0 +1,99 @@
+<form #addCustomerForm="ngForm" name="trackingForm" (ngSubmit)="submit()" novalidate class="form-inline">
+    <div class="form-group">
+        <label>First Name:
+            <input class="form-control" type="text" required name="FirstName" #FirstName="ngModel"
+                [(ngModel)]="customer.FirstName" />
+        </label>
+    </div>
+    <div class="form-group">
+        <label>Last Name:
+            <input class="form-control" type="text" required name="LastName" #LastName="ngModel"
+                [(ngModel)]="customer.LastName" />
+        </label>
+    </div>
+    <div class="form-group">
+        <label>Address 1:
+            <input class="form-control" type="text" required name="StreetAddress" #StreetAddress="ngModel"
+                [(ngModel)]="customer.StreetAddress" />
+        </label>
+    </div>
+    <div class="form-group">
+        <label>Address 2:
+            <input class="form-control" type="text" required name="Address2" #Address2="ngModel"
+                [(ngModel)]="customer.Address2" />
+        </label>
+    </div> <div class="form-group">
+        <label>State or Province:
+            <input class="form-control" type="text" required name="StateOrProvince" #StateOrProvince="ngModel"
+                [(ngModel)]="customer.StateOrProvince" />
+        </label>
+    </div>
+    <div class="form-group">
+        <label>Postal Code:
+            <input class="form-control" type="text" required name="PostalCode" #PostalCode="ngModel"
+                [(ngModel)]="customer.PostalCode" />
+        </label>
+    </div> <div class="form-group">
+        <label>Country:
+            <input class="form-control" type="text" required name="Country" #Country="ngModel"
+                [(ngModel)]="customer.Country" />
+        </label>
+    </div>
+    <div class="form-group">
+        <label>Email Address:
+            <input class="form-control" type="email" required email name="email" #emailAddress="ngModel"
+                [(ngModel)]="customer.Email" disabled />
+        </label>
+    </div>
+    <br>
+    <button *ngIf="add" class="btn btn-primary" type="submit" [disabled]="!addCustomerForm.form.valid">Add Customer</button>
+    <button *ngIf="!add" class="btn btn-primary" type="submit" [disabled]="!addCustomerForm.form.valid">Update Customer</button>
+
+    <div *ngIf="errorMessage" class="alert alert-danger">
+        Sorry, there's been an error communicating with the server: {{errorMessage}}
+    </div> 
+
+    <div *ngIf="!(FirstName.valid || FirstName.pristine)">
+        <div *ngIf="FirstName.errors && FirstName.errors['required']" class="alert alert-danger">
+            Must provide customer email
+        </div>
+    </div>
+    <div *ngIf="!(LastName.valid || LastName.pristine)">
+        <div *ngIf="LastName.errors && LastName.errors['required']" class="alert alert-danger">
+            Must provide customer email
+        </div>
+    </div>
+    <div *ngIf="!(StreetAddress.valid || StreetAddress.pristine)">
+        <div *ngIf="StreetAddress.errors && StreetAddress.errors['required']" class="alert alert-danger">
+            Must provide customer email
+        </div>
+    </div>
+    <div *ngIf="!(Address2.valid || Address2.pristine)">
+        <div *ngIf="Address2.errors && Address2.errors['required']" class="alert alert-danger">
+            Must provide customer email
+        </div>
+    </div>
+    <div *ngIf="!(StateOrProvince.valid || StateOrProvince.pristine)">
+        <div *ngIf="StateOrProvince.errors && StateOrProvince.errors['required']" class="alert alert-danger">
+            Must provide customer email
+        </div>
+    </div>
+    <div *ngIf="!(PostalCode.valid || PostalCode.pristine)">
+        <div *ngIf="PostalCode.errors && PostalCode.errors['required']" class="alert alert-danger">
+            Must provide customer email
+        </div>
+    </div>
+    <div *ngIf="!(Country.valid || Country.pristine)">
+        <div *ngIf="Country.errors && Country.errors['required']" class="alert alert-danger">
+            Must provide customer email
+        </div>
+    </div>
+    <div *ngIf="!(emailAddress.valid || emailAddress.pristine)">
+        <div *ngIf="emailAddress.errors && emailAddress.errors['required']" class="alert alert-danger">
+            Must provide customer email
+        </div>
+        <div *ngIf="emailAddress.errors && emailAddress.errors['email']" class="alert alert-danger">
+            Must be a valid email address
+        </div>
+    </div>
+</form>

@@ -24,7 +24,6 @@ convertTimestamp(timestamp: any): Date {
   if (timestamp._seconds) {
     return new Date(timestamp._seconds * 1000 + timestamp._nanoseconds / 1000000);
   }
-  console.log(timestamp[Object.getOwnPropertyNames(timestamp)[0]])
   const obj = timestamp[Object.getOwnPropertyNames(timestamp)[0]];
   return new Date(obj._seconds * 1000 + obj._nanoseconds / 1000000);
 }

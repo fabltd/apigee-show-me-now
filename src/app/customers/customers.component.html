@@ -1,4 +1,29 @@
-<p *ngFor="let customer of customers$ | async; trackBy:trackCustomer">
-    {{customer.Email}}<br>
+<div class="container">
+    <div class="row">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+              <span class="navbar-brand">Customers</span>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <a routerLink="/customers" class="nav-link"  routerLinkActive="active">Find</a>
+                    <!-- <a [routerLink]="['edit']" class="nav-link"  routerLinkActive="active">Edit</a> -->
+                    <a [routerLink]="['add']" class="nav-link"  routerLinkActive="active">Add</a>
+                    <!-- <a [routerLink]="['delete']" class="nav-link"  routerLinkActive="active">Delete</a> -->
+                </div>
+              </div>
+            </div>
+          </nav>
+        <br>
+        <br>
+        <br>
+    </div>
+    <section class="row">
+        <router-outlet></router-outlet>
+    </section> 
+</div>
 
-</p>
+
+

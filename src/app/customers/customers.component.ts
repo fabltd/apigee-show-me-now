@@ -1,27 +1,17 @@
-import { ApiService } from './../api.service';
-import { Observable } from 'rxjs';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-customers',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterOutlet, RouterLink, RouterLinkActive],
   templateUrl: './customers.component.html',
   styleUrls: ['./customers.component.css']
 })
-export class CustomersComponent implements OnInit {
+export class CustomersComponent {
 
-  constructor(private api: ApiService) {}
+  constructor() {}
 
-  customers$!: Observable<any[]>; 
-
-  ngOnInit() {
-    this.customers$ = this.api.getCustomers();
-  }
-
-  trackCustomer(i: number, customer: any): number {
-    return customer.Email;
-  }
 
 }

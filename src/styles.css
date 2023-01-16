@@ -11,7 +11,17 @@ article {
     padding-left: 2rem;
     padding-top: 0.5rem;
 }
+section {
+    padding-top: 1.5rem;
+}
 form {
     padding-bottom: 1rem;
+}
+label {
+    width:20rem;
+}
+
+aside .nav-pills .nav-link.active, .nav-pills .show >.nav-link  {
+    background-color: #674e8d;
 }
 

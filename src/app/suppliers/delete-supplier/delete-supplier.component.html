@@ -1,0 +1,14 @@
+<div *ngIf="errorMessage" class="alert alert-danger">
+    Sorry, there's been an error communicating with the server: {{errorMessage}}
+</div> 
+<div *ngIf="supplier" class="card" style="width: 30rem;">
+    <div class="card" style="width: 30rem;">
+        <div class="card-body">
+            <app-display-supplier [supplier]="supplier"></app-display-supplier>
+            <p>
+                <br>
+                <button (click)="submit()"  class="btn btn-danger">Confirm Delete</button>
+              </p>
+        </div>
+    </div>
+</div>
