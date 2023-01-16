@@ -8,7 +8,7 @@
               </button>
               <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                    <a routerLink="/shipments" class="nav-link"  routerLinkActive="active">Create</a>
+                    <a routerLink="/shipments" class="nav-link"  routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Create</a>
                      <a [routerLink]="['modify']" class="nav-link"  routerLinkActive="active">Set Progress</a>
                  </div>
               </div>

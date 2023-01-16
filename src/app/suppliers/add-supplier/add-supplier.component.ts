@@ -76,7 +76,7 @@ export class AddSupplierComponent {
           return of({});
         })).subscribe(msg => {
           console.log(msg);
-          this.router.navigate(['suppliers', 'edit', this.supplier.id]);
+          this.router.navigate(['suppliers', 'edit', msg.id]);
         });
     }
     else {

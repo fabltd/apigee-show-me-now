@@ -8,7 +8,7 @@
               </button>
               <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                    <a routerLink="/suppliers" class="nav-link"  routerLinkActive="active">Find</a>
+                    <a [routerLink]="['/suppliers']" class="nav-link"  routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Find</a>
                      <a [routerLink]="['add']" class="nav-link"  routerLinkActive="active">Add</a>
                  </div>
               </div>

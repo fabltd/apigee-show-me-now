@@ -45,6 +45,9 @@ export class AssignCustomerComponent implements OnInit {
 
   submit() {
     if(!this.supplier.Customers.includes(this.email)) {
+      if(!this.supplier.Customers) {
+        this.supplier.Customers = [];
+      }
       this.supplier.Customers.push(this.email);
       this.supplierService.modifySupplier(this.supplier)
         .pipe(catchError(err => {

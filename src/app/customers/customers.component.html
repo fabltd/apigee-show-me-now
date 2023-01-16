@@ -8,10 +8,8 @@
               </button>
               <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                    <a routerLink="/customers" class="nav-link"  routerLinkActive="active">Find</a>
-                    <!-- <a [routerLink]="['edit']" class="nav-link"  routerLinkActive="active">Edit</a> -->
+                    <a routerLink="/customers" class="nav-link"  routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Find</a>
                     <a [routerLink]="['add']" class="nav-link"  routerLinkActive="active">Add</a>
-                    <!-- <a [routerLink]="['delete']" class="nav-link"  routerLinkActive="active">Delete</a> -->
                 </div>
               </div>
             </div>
