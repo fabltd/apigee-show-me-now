@@ -51,13 +51,13 @@ export class ApiService {
 
   getShipment(token: string): Observable<any[]> {
     return this.httpClient
-      .get<any>(`${environment.url}shipments/?id=${token}`, this.getAuthorizedHeaders())
+      .get<any>(`${environment.url}shipments?id=${token}`, this.getAuthorizedHeaders())
       .pipe(map(result=>result.result));
   }
 
   getShipments(): Observable<any[]> {
     return this.httpClient
-      .get<any>(`${environment.url}shipments/`, this.getAuthorizedHeaders())
+      .get<any>(`${environment.url}shipments`, this.getAuthorizedHeaders())
       .pipe(map(result=>result.result));
   }
 
@@ -74,13 +74,13 @@ export class ApiService {
 
   getSupplier(id: string): Observable<any[]> {
     return this.httpClient
-      .get<any>(`${environment.url}suppliers/?id=${id}`, this.getAuthorizedHeaders())
+      .get<any>(`${environment.url}suppliers?id=${id}`, this.getAuthorizedHeaders())
       .pipe(map(result=>result.result));
   }
 
   getSuppliers(): Observable<any[]> {
     return this.httpClient
-      .get<any>(`${environment.url}suppliers/`, this.getAuthorizedHeaders())
+      .get<any>(`${environment.url}suppliers`, this.getAuthorizedHeaders())
       .pipe(map(result=>result.result));
   }
 
@@ -98,7 +98,7 @@ export class ApiService {
 
   deleteSupplier(id: string): Observable<any[]> {
     return this.httpClient
-      .delete<any>(`${environment.url}suppliers/?id=${id}`, this.getAuthorizedHeaders())
+      .delete<any>(`${environment.url}suppliers?id=${id}`, this.getAuthorizedHeaders())
       .pipe(map(result=>result.result));
   }
 
@@ -109,7 +109,7 @@ export class ApiService {
 
   getCustomer(email: string): Observable<any[]> {
     return this.httpClient
-      .get<any>(`${environment.url}customers/?email=${email}`, this.getAuthorizedHeaders())
+      .get<any>(`${environment.url}customers?email=${email}`, this.getAuthorizedHeaders())
       .pipe(map(result=>result.result));
   }
 
@@ -133,7 +133,7 @@ export class ApiService {
 
   deleteCustomer(email: string): Observable<any[]> {
     return this.httpClient
-      .delete<any>(`${environment.url}customers/?email=${email}`, this.getAuthorizedHeaders())
+      .delete<any>(`${environment.url}customers?email=${email}`, this.getAuthorizedHeaders())
       .pipe(map(result=>result.result));
   }
 
