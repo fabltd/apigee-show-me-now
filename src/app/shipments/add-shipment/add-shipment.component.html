@@ -16,7 +16,7 @@
     <p>
         {{supplier.Info.Name}}
     </p>
-     <div *ngIf="supplier.Customers.length>0">
+     <div *ngIf="supplier.Customers?.length>0">
         <label>Select Customer:
             <select #customers required  [(ngModel)]="customerEmail" name="email" >
                 <option *ngFor="let customer of supplier.Customers" [value]="customer">
@@ -27,6 +27,9 @@
         <br>
         <br>
         <button class="btn btn-primary" type="submit" [disabled]="!addShipmentForm.form.valid">Add Shipment</button>
+     </div>
+    <div *ngIf="!supplier.Customers">
+        Sorry, you need to assign a customer to this supplier before you can create a shipment.
      </div>
  
  

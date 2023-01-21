@@ -2,8 +2,6 @@ import { ApiService } from './api.service';
 import { RouterLink, RouterOutlet, RouterLinkActive } from '@angular/router';
 import { Component } from '@angular/core';
 import { CustomersComponent } from './customers/customers.component';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
-import firebase from 'firebase/compat/app';
 import { CommonModule } from '@angular/common';
 
 @Component({

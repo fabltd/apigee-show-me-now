@@ -1,6 +1,6 @@
 export const environment = {
     production: false,
-    url: 'https://api.roiapigee.net/show-me-now/v0/',
+    url: 'http://localhost:8080/v1/',
     firebaseConfig : {
       apiKey: "AIzaSyA4YBPt8-CiwgN-yLT_BE-M33WaK9tzrhg",
       authDomain: "apigee-x-backend-373813.firebaseapp.com",

@@ -2,7 +2,6 @@ import { ShipmentService } from './../shipments/shipment.service';
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({

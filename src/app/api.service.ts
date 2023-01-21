@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
+
 import { environment } from 'src/environments/environment';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import firebase from 'firebase/compat/app';
 
-// TODO
-// add API key (and in environment file)
 
 
 @Injectable({
