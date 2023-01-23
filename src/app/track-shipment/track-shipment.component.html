@@ -17,7 +17,7 @@
     </form>
     <div *ngIf="shipment?.ShipmentDate">
         <br>
-        <h2>Shipment Date: {{convertTimestamp(shipment?.ShipmentDate) | date:'short'}}</h2>
+        <h2>Shipment Date: {{convertTimestamp(shipment?.ShipmentDate) | date}}</h2>
         <br>
         <div   class="stepper-wrapper">
             <div *ngFor="let count of counter" class="stepper-item"
@@ -25,7 +25,7 @@
                 <div class="step-counter">{{count+1}}</div>
                 <div class="step-name">{{steps[count]}}</div>
                 <div *ngIf="shipment?.progress?.length>count" class="step-date">
-                    {{convertTimestamp(shipment?.progress[count]) | date:'short'}}
+                    {{convertTimestamp(shipment?.progress[count]) | date}}
                 </div>
             </div>
         </div>

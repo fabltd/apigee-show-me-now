@@ -1,4 +1,7 @@
 <form #addSupplierForm="ngForm" name="trackingForm" (ngSubmit)="submit()" novalidate>
+    <div *ngIf="supplier.id">
+        Id: {{supplier.id}}<br><br>
+    </div>
     <div class="form-group">
         <label>Name:
             <input class="form-control" type="text" required name="FirstName" #FirstName="ngModel"
@@ -44,7 +47,7 @@
             <br> (Click "Update Supplier" to apply deletions)
         </span>
         <br><span *ngIf="supplier.id">
-            (Add Customers using the <a [routerLink]="['/suppliers', 'assign', supplier.id]" >assign customer</a> form)
+            (Add Customers using the <a [routerLink]="['/suppliers', 'assign', supplier.id]" class="btn btn-primary" >assign customer</a> form)
         </span>
         <span  *ngIf="!supplier.id">
             (Once supplier exists, add Customers using the Assign Customer form)
@@ -66,32 +69,32 @@
 
     <div *ngIf="!(FirstName.valid || FirstName.pristine)">
         <div *ngIf="FirstName.errors && FirstName.errors['required']" class="alert alert-danger">
-            Must provide supplier email
+            Must provide supplier First Name
         </div>
     </div>
     <div *ngIf="!(StreetAddress.valid || StreetAddress.pristine)">
         <div *ngIf="StreetAddress.errors && StreetAddress.errors['required']" class="alert alert-danger">
-            Must provide supplier email
+            Must provide supplier Street Address
         </div>
     </div>
     <div *ngIf="!(Address2.valid || Address2.pristine)">
         <div *ngIf="Address2.errors && Address2.errors['required']" class="alert alert-danger">
-            Must provide supplier email
+            Must provide supplier Address2
         </div>
     </div>
     <div *ngIf="!(StateOrProvince.valid || StateOrProvince.pristine)">
         <div *ngIf="StateOrProvince.errors && StateOrProvince.errors['required']" class="alert alert-danger">
-            Must provide supplier email
+            Must provide supplier State Or Province
         </div>
     </div>
     <div *ngIf="!(PostalCode.valid || PostalCode.pristine)">
         <div *ngIf="PostalCode.errors && PostalCode.errors['required']" class="alert alert-danger">
-            Must provide supplier email
+            Must provide supplier Postal Code
         </div>
     </div>
     <div *ngIf="!(Country.valid || Country.pristine)">
         <div *ngIf="Country.errors && Country.errors['required']" class="alert alert-danger">
-            Must provide supplier email
+            Must provide supplier Country
         </div>
     </div>
 
