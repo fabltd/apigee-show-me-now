@@ -26,7 +26,7 @@ export class ApiService {
     this.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider())
     .then((result) => {
       const credential = result.credential as firebase.auth.OAuthCredential;
-      this.bearerToken = credential.accessToken || '';
+      this.bearerToken = credential.idToken || '';
     });
   }
   logout() {
