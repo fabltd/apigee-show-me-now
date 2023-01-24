@@ -13,7 +13,7 @@
             <a class="nav-link text-white" (click)="login()">Login with Google</a>
           </li>
           <li *ngIf="api.bearerToken !== ''">
-            <a class="nav-link text-white" (click)="logout()">Logout</a>
+            <a class="nav-link text-white" (click)="logout()">Logout {{api.user}}</a>
             <ul>
               <li>
                 <a routerLink="/suppliers" class="nav-link text-white" routerLinkActive="active">Suppliers</a>

@@ -13,6 +13,7 @@ import 'firebase/compat/auth';
 })
 export class ApiService {
 
+  user? = '';
   bearerToken = '';
   firebaseApp: firebase.app.App;
   firebaseAuth: firebase.auth.Auth;
@@ -30,6 +31,9 @@ export class ApiService {
     .then(ret => {
       this.firebaseAuth.currentUser?.getIdToken(true).then((idToken) => {
           this.bearerToken = idToken;
+          if (this.firebaseAuth.currentUser?.displayName) {
+            this.user =  this.firebaseAuth.currentUser.displayName;
+          }
         });
       });
   }
