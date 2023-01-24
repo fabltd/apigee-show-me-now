@@ -1,14 +1,14 @@
 export const environment = {
-    production: false,
-    url: 'http://localhost:8080/v1/',
-    firebaseConfig : {
-      apiKey: "AIzaSyA4YBPt8-CiwgN-yLT_BE-M33WaK9tzrhg",
-      authDomain: "apigee-x-backend-373813.firebaseapp.com",
-      projectId: "apigee-x-backend-373813",
-      storageBucket: "apigee-x-backend-373813.appspot.com",
-      messagingSenderId: "201520801018",
-      appId: "1:201520801018:web:ecb9b73906acac12661543"
-    },
-    key: 'giJbIK8n6Udq6TVcrpf4lImldRM0Far4CSAUAGYtsXD60rvv'
-  };
-  
+  production: true,
+  url: 'https://34.110.192.73.nip.io/show-me-now/v0/',
+  firebaseConfig : {
+    apiKey: "AIzaSyBnu4F7x_k7b9V9utyG2mFTkM4cj6D6R7w",
+    authDomain: "qwiklabs-gcp-03-08bc64beb50f.firebaseapp.com",
+    projectId: "qwiklabs-gcp-03-08bc64beb50f",
+    storageBucket: "qwiklabs-gcp-03-08bc64beb50f.appspot.com",
+    messagingSenderId: "1033017868484",
+    appId: "1:1033017868484:web:46fb41ca35e85f463a8991",
+    measurementId: "G-Y2X3HEW8K0"
+  },
+  key: 'CbEhGA7Sl1LiBCNM1i0MHqBBjQMaZtzdSlCm2PAFFlTqEupw'
+};

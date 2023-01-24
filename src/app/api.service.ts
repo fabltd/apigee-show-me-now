@@ -3,8 +3,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
 import firebase from 'firebase/compat/app';
+import 'firebase/compat/auth';
 
 
 
@@ -14,23 +14,29 @@ import firebase from 'firebase/compat/app';
 export class ApiService {
 
   bearerToken = '';
+  firebaseApp: firebase.app.App;
+  firebaseAuth: firebase.auth.Auth;
 
+  constructor(private httpClient: HttpClient) { 
+      this.firebaseApp = firebase.initializeApp(environment.firebaseConfig);
+      this.firebaseAuth = this.firebaseApp.auth();
 
-  constructor(private httpClient: HttpClient,
-    public auth: AngularFireAuth) { }
+    }
 
 // authentication
-
-
   login() {
-    this.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider())
-    .then((result) => {
-      const credential = result.credential as firebase.auth.OAuthCredential;
-      this.bearerToken = credential.idToken || '';
-    });
+    const provider = new firebase.auth.GoogleAuthProvider();
+    (this.firebaseAuth.signInWithPopup(provider))
+    .then(ret => {
+      this.firebaseAuth.currentUser?.getIdToken(true).then((idToken) => {
+          this.bearerToken = idToken;
+        });
+      });
   }
+
+
   logout() {
-    this.auth.signOut().then((result) => {
+    this.firebaseAuth.signOut().then((result) => {
       this.bearerToken = '';
     });
   }

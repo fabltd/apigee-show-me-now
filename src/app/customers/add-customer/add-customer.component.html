@@ -46,7 +46,7 @@
     <div class="form-group">
         <label>Email Address:
             <input class="form-control" type="email" required email name="email" #emailAddress="ngModel"
-                [(ngModel)]="customer.Email" disabled />
+                [(ngModel)]="customer.Email" [disabled]="!add" />
         </label>
     </div>
     <br>
