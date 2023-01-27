@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { concatMap, defer, from, map, Observable, of } from 'rxjs';
+import { concatMap, from, map, Observable } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
-
 
 
 @Injectable({
@@ -40,21 +39,10 @@ export class ApiService {
       });
   }
 
-
   logout() {
     this.firebaseAuth.signOut().then((result) => {
       this.bearerToken = '';
     });
-  }
-
-  private getAuthorizedHeaders() {
-    return {
-      headers: new HttpHeaders({
-        // 'content-type': 'application/json',
-        apikey: environment.key,
-        Authorization: 'Bearer ' + this.bearerToken
-      })
-    }
   }
 
   private getHeaders(token: string) {
@@ -121,11 +109,23 @@ export class ApiService {
   }
 
   addShipment(shipment: any): Observable<any> {
-    return this.httpClient.post<any>(`${environment.url}shipments`, shipment, this.getAuthorizedHeaders());
+    return from(this.getToken()).pipe(
+      concatMap((token: any) => {
+        return this.httpClient.post<any>(`${environment.url}shipments`, 
+          shipment, 
+          this.getHeaders(token));
+      })
+    );
   }
 
   modifyShipment(shipment: any): Observable<any> {
-    return this.httpClient.patch<any>(`${environment.url}shipments`, shipment, this.getAuthorizedHeaders());
+    return from(this.getToken()).pipe(
+      concatMap((token: any) => {
+        return this.httpClient.patch<any>(`${environment.url}shipments`, 
+          shipment, 
+          this.getHeaders(token));
+      })
+    );
   }
 
 
@@ -152,21 +152,40 @@ export class ApiService {
   }
 
   addSupplier(supplier: any): Observable<any> {
-    return this.httpClient.post<any>(`${environment.url}suppliers`, supplier, this.getAuthorizedHeaders());
-  }
+    return from(this.getToken()).pipe(
+      concatMap((token: any) => {
+        return this.httpClient.post<any>(`${environment.url}suppliers`, 
+        supplier, this.getHeaders(token));
+      })
+    );
+   }
 
   updateSupplier(supplier: any): Observable<any> {
-    return this.httpClient.put<any>(`${environment.url}suppliers`, supplier, this.getAuthorizedHeaders());
+    return from(this.getToken()).pipe(
+      concatMap((token: any) => {
+        return this.httpClient.put<any>(`${environment.url}suppliers`, 
+        supplier, this.getHeaders(token));
+      })
+    );
   }
 
   modifySupplier(supplier: any): Observable<any> {
-    return this.httpClient.patch<any>(`${environment.url}suppliers`, supplier, this.getAuthorizedHeaders());
+    return from(this.getToken()).pipe(
+      concatMap((token: any) => {
+        return this.httpClient.patch<any>(`${environment.url}suppliers`, 
+        supplier, this.getHeaders(token));
+      })
+    );
   }
 
   deleteSupplier(id: string): Observable<any[]> {
-    return this.httpClient
-      .delete<any>(`${environment.url}suppliers?id=${id}`, this.getAuthorizedHeaders())
-      .pipe(map(result => result.result));
+    return from(this.getToken()).pipe(
+      concatMap((token: any) => {
+        return this.httpClient
+          .delete<any>(`${environment.url}suppliers?id=${id}`, this.getHeaders(token))
+          .pipe(map(result => result.result));
+      })
+    );
   }
 
   // customers
@@ -192,21 +211,40 @@ export class ApiService {
   }
 
   addCustomer(customer: any): Observable<any> {
-    return this.httpClient.post<any>(`${environment.url}customers`, customer, this.getAuthorizedHeaders());
+    return from(this.getToken()).pipe(
+      concatMap((token: any) => {
+        return this.httpClient.post<any>(`${environment.url}customers`, customer, 
+          this.getHeaders(token));
+      })
+    );
   }
 
   updateCustomer(customer: any): Observable<any> {
-    return this.httpClient.put<any>(`${environment.url}customers`, customer, this.getAuthorizedHeaders());
+    return from(this.getToken()).pipe(
+      concatMap((token: any) => {
+        return this.httpClient.put<any>(`${environment.url}customers`, customer, 
+          this.getHeaders(token));
+      })
+    );
   }
 
   modifyCustomer(customer: any): Observable<any> {
-    return this.httpClient.patch<any>(`${environment.url}customers`, customer, this.getAuthorizedHeaders());
+    return from(this.getToken()).pipe(
+      concatMap((token: any) => {
+        return this.httpClient.patch<any>(`${environment.url}customers`, customer, 
+          this.getHeaders(token));
+      })
+    );
   }
 
   deleteCustomer(email: string): Observable<any[]> {
-    return this.httpClient
-      .delete<any>(`${environment.url}customers?email=${email}`, this.getAuthorizedHeaders())
-      .pipe(map(result => result.result));
+    return from(this.getToken()).pipe(
+      concatMap((token: any) => {
+        return this.httpClient
+          .delete<any>(`${environment.url}customers?email=${email}`, this.getHeaders(token))
+          .pipe(map(result => result.result));
+      })
+    );
   }
 
 
