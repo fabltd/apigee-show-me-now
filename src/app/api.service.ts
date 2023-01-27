@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { map, Observable } from 'rxjs';
+import { concatMap, defer, from, map, Observable, of } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
 import firebase from 'firebase/compat/app';
@@ -13,26 +13,28 @@ import 'firebase/compat/auth';
 })
 export class ApiService {
 
-  user? = '';
+  user?= '';
   bearerToken = '';
   firebaseApp: firebase.app.App;
   firebaseAuth: firebase.auth.Auth;
+  grecaptcha?: any;
 
-  constructor(private httpClient: HttpClient) { 
-      this.firebaseApp = firebase.initializeApp(environment.firebaseConfig);
-      this.firebaseAuth = this.firebaseApp.auth();
 
-    }
+  constructor(private httpClient: HttpClient) {
+    this.firebaseApp = firebase.initializeApp(environment.firebaseConfig);
+    this.firebaseAuth = this.firebaseApp.auth();
 
-// authentication
+  }
+
+  // authentication
   login() {
     const provider = new firebase.auth.GoogleAuthProvider();
     (this.firebaseAuth.signInWithPopup(provider))
-    .then(ret => {
-      this.firebaseAuth.currentUser?.getIdToken(true).then((idToken) => {
+      .then(ret => {
+        this.firebaseAuth.currentUser?.getIdToken(true).then((idToken) => {
           this.bearerToken = idToken;
           if (this.firebaseAuth.currentUser?.displayName) {
-            this.user =  this.firebaseAuth.currentUser.displayName;
+            this.user = this.firebaseAuth.currentUser.displayName;
           }
         });
       });
@@ -46,28 +48,76 @@ export class ApiService {
   }
 
   private getAuthorizedHeaders() {
-    return { headers: new HttpHeaders({
-      // 'content-type': 'application/json',
-      apikey: environment.key,
-      Authorization: 'Bearer ' + this.bearerToken
-    }) }
+    return {
+      headers: new HttpHeaders({
+        // 'content-type': 'application/json',
+        apikey: environment.key,
+        Authorization: 'Bearer ' + this.bearerToken
+      })
+    }
+  }
 
+  private getHeaders(token: string) {
+    return {
+      headers: new HttpHeaders({
+        // 'content-type': 'application/json',
+        apikey: environment.key,
+        Authorization: 'Bearer ' + this.bearerToken,
+        'x-recaptcha-key': environment.recaptcha,
+        'x-recaptcha-token': token
+      })
+    }
+  }
+
+
+  // recaptcha 
+
+  public setGrecaptcha(gre: any): void {
+    this.grecaptcha = gre;
+  }
+
+
+  getToken(): any {
+    let promise = new Promise((resolve, reject) => {
+      if (environment.recaptcha) {
+        this.grecaptcha?.enterprise.ready(() => {
+          this.grecaptcha?.enterprise.execute(environment.recaptcha)
+            .then((token: any) => {
+              console.log(token);
+              resolve(token);
+            });
+        });
+      }
+      else {
+        resolve('');
+      }
+    });
+    return promise;
   }
 
 
 
-// shipments
+  // shipments
 
-  getShipment(token: string): Observable<any[]> {
-    return this.httpClient
-      .get<any>(`${environment.url}shipments?id=${token}`, this.getAuthorizedHeaders())
-      .pipe(map(result=>result.result));
+
+  getShipment(id: string): Observable<any[]> {
+    return from(this.getToken()).pipe(
+      concatMap((token: any) => {
+        return this.httpClient
+          .get<any>(`${environment.url}shipments?id=${id}`, this.getHeaders(token))
+          .pipe(map(result => result.result));
+      })
+    );
   }
 
   getShipments(): Observable<any[]> {
-    return this.httpClient
-      .get<any>(`${environment.url}shipments`, this.getAuthorizedHeaders())
-      .pipe(map(result=>result.result));
+    return from(this.getToken()).pipe(
+      concatMap((token: any) => {
+        return this.httpClient
+          .get<any>(`${environment.url}shipments`, this.getHeaders(token))
+          .pipe(map(result => result.result));
+      })
+    );
   }
 
   addShipment(shipment: any): Observable<any> {
@@ -79,18 +129,26 @@ export class ApiService {
   }
 
 
-// suppliers
+  // suppliers
 
   getSupplier(id: string): Observable<any[]> {
-    return this.httpClient
-      .get<any>(`${environment.url}suppliers?id=${id}`, this.getAuthorizedHeaders())
-      .pipe(map(result=>result.result));
+    return from(this.getToken()).pipe(
+      concatMap((token: any) => {
+        return this.httpClient
+          .get<any>(`${environment.url}suppliers?id=${id}`, this.getHeaders(token))
+          .pipe(map(result => result.result));
+      })
+    );
   }
 
   getSuppliers(): Observable<any[]> {
-    return this.httpClient
-      .get<any>(`${environment.url}suppliers`, this.getAuthorizedHeaders())
-      .pipe(map(result=>result.result));
+    return from(this.getToken()).pipe(
+      concatMap((token: any) => {
+        return this.httpClient
+          .get<any>(`${environment.url}suppliers`, this.getHeaders(token))
+          .pipe(map(result => result.result));
+      })
+    );
   }
 
   addSupplier(supplier: any): Observable<any> {
@@ -108,24 +166,29 @@ export class ApiService {
   deleteSupplier(id: string): Observable<any[]> {
     return this.httpClient
       .delete<any>(`${environment.url}suppliers?id=${id}`, this.getAuthorizedHeaders())
-      .pipe(map(result=>result.result));
+      .pipe(map(result => result.result));
   }
-
-
-
 
   // customers
 
   getCustomer(email: string): Observable<any[]> {
-    return this.httpClient
-      .get<any>(`${environment.url}customers?email=${email}`, this.getAuthorizedHeaders())
-      .pipe(map(result=>result.result));
+    return from(this.getToken()).pipe(
+      concatMap((token: any) => {
+        return this.httpClient
+          .get<any>(`${environment.url}customers?email=${email}`, this.getHeaders(token))
+          .pipe(map(result => result.result));
+      })
+    );
   }
 
   getCustomers(): Observable<any[]> {
-    return this.httpClient
-      .get<any>(`${environment.url}customers`, this.getAuthorizedHeaders())
-      .pipe(map(result=>result.result));
+    return from(this.getToken()).pipe(
+      concatMap((token: any) => {
+        return this.httpClient
+          .get<any>(`${environment.url}customers`, this.getHeaders(token))
+          .pipe(map(result => result.result));
+      })
+    );
   }
 
   addCustomer(customer: any): Observable<any> {
@@ -143,10 +206,10 @@ export class ApiService {
   deleteCustomer(email: string): Observable<any[]> {
     return this.httpClient
       .delete<any>(`${environment.url}customers?email=${email}`, this.getAuthorizedHeaders())
-      .pipe(map(result=>result.result));
+      .pipe(map(result => result.result));
   }
 
 
-  
+
 
 }

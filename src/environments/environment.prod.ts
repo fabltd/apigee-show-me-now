@@ -1,5 +1,6 @@
 export const environment = {
     production: true,
+    site: '',
     url: 'https://api.roiapigee.net/show-me-now/v0/',
     firebaseConfig : {
       apiKey: "AIzaSyA4YBPt8-CiwgN-yLT_BE-M33WaK9tzrhg",
