@@ -71,7 +71,7 @@ export class ApiService {
         this.grecaptcha?.enterprise.ready(() => {
           this.grecaptcha?.enterprise.execute(environment.recaptcha)
             .then((token: any) => {
-              console.log(token);
+              // console.log(token);
               resolve(token);
             });
         });

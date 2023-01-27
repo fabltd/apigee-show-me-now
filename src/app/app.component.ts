@@ -10,8 +10,8 @@ const SCRIPT_PATH = 'https://www.google.com/recaptcha/enterprise.js?render=' + e
 declare let grecaptcha: any;
 
 @Component({
-  standalone:true,
-  imports:[CommonModule, RouterOutlet, CustomersComponent, RouterLink, RouterLinkActive],
+  standalone: true,
+  imports: [CommonModule, RouterOutlet, CustomersComponent, RouterLink, RouterLinkActive],
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
@@ -19,7 +19,7 @@ declare let grecaptcha: any;
 export class AppComponent implements OnInit {
   title = 'show-me-now';
 
-  constructor(protected api: ApiService,  
+  constructor(protected api: ApiService,
     private renderer: Renderer2,
     private scriptService: ScriptService) {
   }
@@ -33,15 +33,18 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const scriptElement = this.scriptService.loadJsScript(this.renderer, SCRIPT_PATH);
-    scriptElement.onload = () => {
-     console.log('Google Recaptcha Script loaded');
-     this.api.setGrecaptcha(grecaptcha);
+    if (environment.recaptcha) {
+      const scriptElement = this.scriptService.loadJsScript(this.renderer, SCRIPT_PATH);
+      scriptElement.onload = () => {
+        console.log('Google Recaptcha Script loaded');
+        this.api.setGrecaptcha(grecaptcha);
+      }
+      scriptElement.onerror = () => {
+        console.log('Could not load the Google Script!');
+      }
     }
-    scriptElement.onerror = () => {
-      console.log('Could not load the Google Script!');
-    }
+
   }
-  
+
 
 }
