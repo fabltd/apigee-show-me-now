@@ -9,7 +9,7 @@
               <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
                     <a routerLink="/customers" class="nav-link"  routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Find</a>
-                    <a [routerLink]="['add']" class="nav-link"  routerLinkActive="active">Add</a>
+                    <a  *ngIf="api.email?.includes('qwiklabs')" [routerLink]="['add']" class="nav-link"  routerLinkActive="active">Add</a>
                 </div>
               </div>
             </div>

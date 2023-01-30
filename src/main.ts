@@ -1,3 +1,4 @@
+import { AccessGuard } from './app/access.guard';
 import { CustomersComponent } from './app/customers/customers.component';
 import { ShipmentsComponent } from './app/shipments/shipments.component';
 import { SuppliersComponent } from './app/suppliers/suppliers.component';
@@ -13,11 +14,13 @@ import { importProvidersFrom } from '@angular/core';
 const routes: Routes = [
 {
   path: 'shipments', 
+  canActivate: [AccessGuard],
   component: ShipmentsComponent,
   loadChildren: () => import('./app/shipments/shipment.routes').then(mod => mod.SHIPMENT_ROUTES)
 },
 {
   path: 'suppliers', 
+  canActivate: [AccessGuard],
   component: SuppliersComponent,
   loadChildren: () => import('./app/suppliers/supplier.routes').then(mod => mod.SUPPLIER_ROUTES)
 },

@@ -1,3 +1,4 @@
+import { ApiService } from './../api.service';
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
@@ -11,7 +12,7 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 })
 export class CustomersComponent {
 
-  constructor() {}
+  constructor(protected api: ApiService) {}
 
 
 }

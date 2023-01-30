@@ -15,10 +15,10 @@
           <li *ngIf="api.bearerToken !== ''">
             <a class="nav-link text-white" (click)="logout()">Logout {{api.user}}</a>
             <ul>
-              <li>
+              <li *ngIf="api.email?.includes('qwiklabs')">
                 <a routerLink="/suppliers" class="nav-link text-white" routerLinkActive="active">Suppliers</a>
               </li>
-              <li>
+              <li *ngIf="api.email?.includes('qwiklabs')">
                 <a routerLink="/shipments" class="nav-link text-white" routerLinkActive="active">Shipments</a>
               </li>
               <li>

@@ -1,6 +1,7 @@
+import { ApiService } from './../../api.service';
 import { DisplayCustomerComponent } from './../display-customer/display-customer.component';
 import { RouterLink } from '@angular/router';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { CustomerService } from '../customer.service';
@@ -13,13 +14,20 @@ import { catchError, of, throwError } from 'rxjs';
   templateUrl: './find-customer.component.html',
   styleUrls: ['./find-customer.component.css']
 })
-export class FindCustomerComponent {
+export class FindCustomerComponent implements OnInit {
 
   email = '';
   customer?: any;
   errorMessage = '';
 
-  constructor(protected customerServices: CustomerService) { }
+  constructor(protected customerServices: CustomerService,
+    private api: ApiService) { }
+
+  ngOnInit(): void {
+    if(!this.api.email?.includes('qwiklabs')){
+      this.email = this.api.email?.slice() || '';
+    }
+  }
 
   submit() {
     this.errorMessage = '';
