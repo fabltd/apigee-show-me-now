@@ -1,4 +1,4 @@
-FROM node:16 as b
+FROM node:18 as b
 WORKDIR /usr/src/app
 RUN npm i -g @angular/cli
 COPY package.json package.json
